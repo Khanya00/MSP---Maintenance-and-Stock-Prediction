@@ -1,0 +1,116 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MSP.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+
+namespace MSP.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+
+
+        public AccountController(UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
+        {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+        }
+
+        //Login Actions
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+        //{
+        //    //Checking the state of model passed as parameter.
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result = await signInManager.PasswordSignInAsync(model.Email,
+        //            model.Password, model.RememberMe, false);
+               
+
+        //        //If user is valid & present in database, we are redirecting it
+        //        if (result.Succeeded)
+        //        {
+        //            if (!string.IsNullOrEmpty(returnUrl))
+        //            {
+        //                return Redirect(returnUrl);
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction("index", "home");
+        //            }
+        //        }
+        //        //If model state is not valid, the model with error message is returned to the View.
+        //        ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+        //    }
+
+        //    return View(model);
+        //}
+
+        //Registration Actions
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Copy data from RegisterViewModel to IdentityUser
+                var user = new IdentityUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
+
+                // Store user data in AspNetUsers database table
+                var result = await userManager.CreateAsync(user, model.Password);
+
+                // If user is successfully created, sign-in the user using
+                // SignInManager and redirect to index action of HomeController
+                if (result.Succeeded)
+                {
+                    await signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("index", "home");
+                }
+
+                // If there are any errors, add them to the ModelState object
+                // which will be displayed by the validation summary tag helper
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
+        }
+    }
+
+}
+
+
