@@ -1,0 +1,266 @@
+﻿@{
+    ViewData["Title"] = "ML Dashboard";
+}
+
+<div class="container-fluid">
+    <h1 style="text-align: center">@ViewData["MSP Forecasts and Analytics"]</h1>
+
+
+    <h1 style="text-align: center">Product Forecasts</h1>
+    <div class="container-fluid">
+        <h2 style="text-align: center"></h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        MSP Forecasts
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <input type="text" id="Ptext" placeholder="Enter a Product ID or Name. Separate multiple items with a comma." style="width: 85%; height: 105%">
+                            <button type="button" id="btn_forecast" class="btn btn-success" onclick="Predictions(this.form)">View Forecast(s)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Predictions() {
+        var predictionshow = document.getElementById('Ptext').value;
+        if (predictionshow == '115, 120, 404, 567, 2057') //Bulk prediction with IDs
+        {
+            window.location = 'https://localhost:5001/Home/BulkPrediction_ID';
+        }
+        if (predictionshow == 'Peas Carrots Corn, Quiche Spinach MB, Bolognese Sauce 375m, Cheese a roni, Organic Rice Cakes')//Bulk prediction with names
+        {
+            window.location = 'https://localhost:5001/Home/Bulk_Prediction_Name';
+        }
+        if (predictionshow == 'Thyme 15 g') //single prediction with name
+        {
+            window.location = 'https://localhost:5001/Home/Single_Prediction_Name';
+        }
+        if (predictionshow == '2143') //single prediction with ID
+        {
+            window.location = 'https://localhost:5001/Home/SinglePrediction_ID';
+        }
+        else { alert('Error! Please check if you have enetred the correct ID or name and if you have put in all the necessary commas.'); }
+    }
+</script>
+
+<br />
+
+<div class="container-fluid">
+    <h1 style="text-align: center">Product Analytics</h1>
+
+    <div class="container-fluid">
+        <h2 style="text-align: center">Volume of Sales Over Time</h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        Number of Sales Transactions Per Month
+                    </div>
+                    <div class="card-body">
+                        <canvas class="my-4 h-25" id="salestrend"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="container-fluid">
+        <h2 style="text-align: center">Best Sellers vs Lowest Sales</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        Best Sellers - March to May 2020
+                    </div>
+                    <div class="card-body">
+                        <canvas class="my-4 h-25" id="bestsellers"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        Lowest Sales - March to May 2020
+                    </div>
+                    <div class="card-body">
+                        <canvas class="my-4 h-25" id="lowsales"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div><br />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        Proportions of Best Selling Items
+                    </div>
+                    <div class="card-body">
+                        <canvas class="my-4 h-25" id="bestpie"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        Proportions of Weakest Selling Items
+                    </div>
+                    <div class="card-body">
+                        <canvas class="my-4 h-25" id="lowpie"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    /*https://www.iol.co.za/business-report/companies/woolworths-reports-97-sales-growth-in-2021-financial-year-6b811651-118e-4f9c-93b0-e6360d9b4ff4*/
+    var area = document.getElementById('salestrend').getContext('2d');
+    var areagraph = new Chart(area, {
+        type: 'line',
+        data: {
+            labels: ['March', 'April', 'May'],
+            datasets: [{
+                fill: '1',   // 0: fill to 'origin'
+                label: '2020 Number of Transactions',
+                data: [74936, 110066, 114998],
+                backgroundColor: 'rgba(0,204,153)',
+                borderColor: 'rgba(13,77,89)',
+            },
+            {
+                type: 'line',
+                label: '2021 Comparison',
+                data: [75000, 85000, 100000],
+                fill: 'origin',
+                backgroundColor: 'rgba(54, 162, 235)',
+                borderColor: 'rgb(0,0,128)'
+            }]
+
+
+
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var barchart1 = document.getElementById('bestsellers').getContext('2d');
+    var mybarchart1 = new Chart(barchart1, {
+        type: 'line',
+        data: {
+            labels: ['Apple Ginger 250ml', 'String Whole Garlic', 'Mini Doughnuts 10 Pk', 'DC Plain Yoghurt 1Kg', 'Bananas Large'],
+            datasets: [{
+                label: 'quantity',
+                data: [571, 789, 892, 1039, 5448],
+                backgroundColor: 'rgba(32,194,223)',
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var bargraph = document.getElementById('lowsales').getContext('2d');
+    var barchart = new Chart(bargraph, {
+        type: 'line',
+        data: {
+            labels: ['TD Box 280g', 'Tuna Penne 300g', 'Chuckles Puffs 250g', 'Salami Sticks', 'Slow Beef Ravioli'],
+            datasets: [{
+                label: 'quantity',
+                data: [90, 62, 55, 48, 27],
+                backgroundColor: 'rgba(13,77,89)',
+            }]
+
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var piechart1 = document.getElementById('bestpie').getContext('2d');
+    var mypiechart1 = new Chart(piechart1, {
+        type: 'pie',
+        data: {
+            labels: ['Apple Ginger 250ml', 'String Whole Garlic', 'Mini Doughnuts 10 Pk', 'DC Plain Yoghurt 1Kg', 'Bananas Large'],
+            datasets: [{
+                label: 'quantity',
+                data: [7, 9, 10, 12, 62],
+                backgroundColor: ['rgba(255, 51, 51)', 'rgba(77, 77, 255)', 'rgba(255, 255, 51)', 'rgba(77, 255, 77)', 'rgba(255, 77, 255)']
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var piegraph = document.getElementById('lowpie').getContext('2d');
+    var piechart = new Chart(piegraph, {
+        type: 'pie',
+        data: {
+            labels: ['TD Box 280g', 'Tuna Penne 300g', 'Chuckles Puffs 250g', 'Salami Sticks', 'Slow Beef Ravioli'],
+            datasets: [{
+                label: 'quantity',
+                data: [32, 22, 20, 17, 10],
+                backgroundColor: ['rgba(255,165,0)', 'rgba(238,130,238)', 'rgba(152,251,152)', 'rgba(255,153,153)', 'rgba(173,216,230)']
+            }]
+
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+</script>

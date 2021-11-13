@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewData["MSP Forecast"] = "MSP Forecast";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Peas Carrots Corn
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="115"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Quiche Spinach MB
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="120"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Bolognese Sauce 375m
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="404"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Cheese a roni
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="567"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    Organic Rice Cakes
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="2057"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    var g = document.getElementById('115').getContext('2d');
+    var graph = new Chart(g, {
+        type: 'bar',
+        data: {
+            labels: ['March (Previous)', 'April(Current)', 'May(Real Value Sold)', 'May (Forecasted Value)'],
+            datasets: [{
+                label: 'quantity',
+                data: [20,25,31,32],
+                backgroundColor: ['rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(152,251,152)']
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var g1 = document.getElementById('120').getContext('2d');
+    var graph1 = new Chart(g1, {
+        type: 'bar',
+        data: {
+            labels: ['March (Previous)', 'April(Current)', 'May(Real Value Sold)', 'May (Forecasted Value)'],
+            datasets: [{
+                label: 'quantity',
+                data: [34,35,42,45],
+                backgroundColor: ['rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(152,251,152)']
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var g2 = document.getElementById('404').getContext('2d');
+    var graph2 = new Chart(g2, {
+        type: 'bar',
+        data: {
+            labels: ['March (Previous)', 'April(Current)', 'May(Real Value Sold)', 'May (Forecasted Value)'],
+            datasets: [{
+                label: 'quantity',
+                data: [67,63,71,73],
+                backgroundColor: ['rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(152,251,152)']
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var g3 = document.getElementById('567').getContext('2d');
+    var graph3 = new Chart(g3, {
+        type: 'bar',
+        data: {
+            labels: ['March (Previous)', 'April(Current)', 'May(Real Value Sold)', 'May (Forecasted Value)'],
+            datasets: [{
+                label: 'quantity',
+                data: [35,36,44,43],
+                backgroundColor: ['rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(152,251,152)']
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+    var g = document.getElementById('2057').getContext('2d');
+    var graph = new Chart(g, {
+        type: 'bar',
+        data: {
+            labels: ['March (Previous)', 'April(Current)', 'May(Real Value Sold)', 'May (Forecasted Value)'],
+            datasets: [{
+                label: 'quantity',
+                data: [53,60,77,81],
+                backgroundColor: ['rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(152,251,152)']
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+</script>
+

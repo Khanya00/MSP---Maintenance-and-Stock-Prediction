@@ -1,0 +1,70 @@
+﻿
+@model MSP.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "User Registration";
+}
+
+<h1>User Registration</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>
+
+@*<link rel="stylesheet" href="~/css/MyCustomStyleSheet.css">
+<div class="background-wrap">
+    <div class="background"></div>
+</div>
+
+<form id="accesspanel" action="login" method="post">
+    <h1 id="litheader">Register</h1>
+    <div class="inset">
+        <p>
+            <label asp-for="Email"></label>
+            <input type="text" name="username" id="email" placeholder="Email address">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </p>
+        <p>
+            <label asp-for="Password"></label>
+            <input type="password" name="password" id="password" placeholder="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </p>
+        <p>
+            <label asp-for="ConfirmPassword"></label>
+            <input type="password" name="password" id="password" placeholder="Confirm Password">
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </p>
+
+        <input class="loginLoginValue" type="hidden" name="service" value="login" />
+    </div>
+    <p class="p-container">
+        <input type="submit" name="Login" id="register" value="Register">
+    </p>
+    <div class="inset">
+        <p class="html, h3">Have an account? </p>
+        <a class="cake" asp-controller="account" asp-action="login">
+            Login
+        </a>
+    </div>
+</form>
+<script src="~/js/Sheet.js"></script>*@

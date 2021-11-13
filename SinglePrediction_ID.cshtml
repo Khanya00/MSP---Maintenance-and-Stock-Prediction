@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "SinglePrediction_ID";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    BUTTER SHORTBREAD
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="butter_shortbread"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    var g = document.getElementById('butter_shortbread').getContext('2d');
+    var graph = new Chart(g, {
+        type: 'bar',
+        data: {
+            labels: ['March (Previous)', 'April(Current)', 'May(Real Value Sold)', 'May (Forecasted Value)'],
+            datasets: [{
+                label: 'quantity',
+                data: [68, 73, 76, 82],
+                backgroundColor: ['rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(255,165,0)', 'rgba(152,251,152)']
+            }]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+
+</script>
